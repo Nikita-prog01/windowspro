@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows Store</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #0078D4 0%, #002050 100%);
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Навигация -->
+    <nav class="bg-gray-900 bg-opacity-95 backdrop-blur-md fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2012.svg" alt="Windows Logo" class="h-8 w-auto">
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#" class="text-white hover:text-gray-300 px-3 py-2 text-sm font-medium">Главная</a>
+                        <a href="#products" class="text-white hover:text-gray-300 px-3 py-2 text-sm font-medium">Продукты</a>
+                        <a href="#support" class="text-white hover:text-gray-300 px-3 py-2 text-sm font-medium">Поддержка</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Главный экран -->
+    <section class="hero-gradient text-white pt-32 pb-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-5xl md:text-7xl font-bold tracking-tight">Windows 11 Pro</h1>
+            <p class="mt-6 text-xl md:text-2xl max-w-3xl mx-auto">Откройте новую эру производительности с самой передовой операционной системой Windows</p>
+            <div class="mt-10">
+                <a href="#buy" class="bg-white text-gray-900 px-8 py-3 rounded-lg text-lg font-medium hover:bg-gray-100 transition-colors">
+                    Купить сейчас
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Продукты -->
+    <section id="products" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-16">Выберите свою версию Windows</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Windows 11 Home -->
+                <div class="bg-gray-50 rounded-2xl p-8 hover:shadow-xl transition-shadow">
+                    <h3 class="text-2xl font-semibold">Windows 11 Home</h3>
+                    <p class="text-3xl font-bold mt-4">7,990 ₽</p>
+                    <ul class="mt-6 space-y-4">
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Для домашнего использования
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Базовые функции безопасности
+                        </li>
+                    </ul>
+                    <button class="w-full mt-8 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                        Купить
+                    </button>
+                </div>
+
+                <!-- Windows 11 Pro -->
+                <div class="bg-gray-50 rounded-2xl p-8 hover:shadow-xl transition-shadow transform scale-105 border-2 border-blue-500">
+                    <div class="absolute top-0 right-0 bg-blue-500 text-white px-4 py-1 rounded-bl-lg">
+                        Популярный выбор
+                    </div>
+                    <h3 class="text-2xl font-semibold">Windows 11 Pro</h3>
+                    <p class="text-3xl font-bold mt-4">12,990 ₽</p>
+                    <ul class="mt-6 space-y-4">
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Для бизнеса и профессионалов
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Расширенные функции безопасности
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Удаленный рабочий стол
+                        </li>
+                    </ul>
+                    <button class="w-full mt-8 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                        Купить
+                    </button>
+                </div>
+
+                <!-- Windows 11 Enterprise -->
+                <div class="bg-gray-50 rounded-2xl p-8 hover:shadow-xl transition-shadow">
+                    <h3 class="text-2xl font-semibold">Windows 11 Enterprise</h3>
+                    <p class="text-3xl font-bold mt-4">По запросу</p>
+                    <ul class="mt-6 space-y-4">
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Для крупных организаций
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Максимальный контроль и безопасность
+                        </li>
+                    </ul>
+                    <button class="w-full mt-8 bg-gray-800 text-white py-3 rounded-lg hover:bg-gray-900 transition-colors">
+                        Связаться
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Преимущества -->
+    <section class="bg-gray-50 py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-16">Почему Windows 11?</h2>
+            <div class="grid md:grid-cols-3 gap-12">
+                <div class="text-center">
+                    <div class="bg-blue-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Производительность</h3>
+                    <p class="text-gray-600">Максимальная скорость и эффективность для всех ваших задач</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-blue-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Безопасность</h3>
+                    <p class="text-gray-600">Встроенная защита от вирусов и вредоносных программ</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-blue-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Интерфейс</h3>
+                    <p class="text-gray-600">Современный и интуитивно понятный дизайн</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Поддержка -->
+    <section id="support" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold mb-8">Нужна помощь?</h2>
+                <p class="text-xl text-gray-600 mb-12">Наша команда поддержки готова помочь вам 24/7</p>
+                <a href="#contact" class="inline-block bg-gray-900 text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition-colors">
+                    Связаться с поддержкой
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">О компании</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-gray-300">О нас</a></li>
+                        <li><a href="#" class="hover:text-gray-300">Контакты</a></li>
+                        <li><a href="#" class="hover:text-gray-300">Блог</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Продукты</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-gray-300">Windows 11 Home</a></li>
+                        <li><a href="#" class="hover:text-gray-300">Windows 11 Pro</a></li>
+                        <li><a href="#" class="hover:text-gray-300">Windows 11 Enterprise</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Поддержка</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-gray-300">FAQ</a></li>
+                        <li><a href="#" class="hover:text-gray-300">Документация</a></li>
+                        <li><a href="#" class="hover:text-gray-300">Сообщество</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Подписаться на новости</h4>
+                    <form class="mt-4">
+                        <input type="email" placeholder="Ваш email" class="w-full px-4 py-2 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:border-blue-500">
+                        <button class="w-full mt-2 bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors">
+                            Подписаться
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center text-sm text-gray-400">
+                © 2024 Windows Store. Все права защищены.
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 
