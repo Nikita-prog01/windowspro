@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Windows Store</title>
+    <link rel="icon" type="image/svg+xml" href="https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2012.svg">
+    <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2012.svg">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -13,6 +15,16 @@
         .hero-gradient {
             background: linear-gradient(135deg, #0078D4 0%, #002050 100%);
         }
+        .tab-button {
+            color: #6B7280;
+        }
+        .tab-button.active {
+            background-color: white;
+            color: #1F2937;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+        .tab-content {
+            transition: all 0.3s ease-in-out;
     </style>
 </head>
 <body class="bg-white">
