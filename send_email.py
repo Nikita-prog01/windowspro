@@ -6,6 +6,9 @@ from email.mime.multipart import MIMEMultipart
 import os
 from dotenv import load_dotenv
 import traceback
+from yookassa import Payment
+import uuid
+from yookassa import Configuration
 
 load_dotenv()
 
@@ -19,10 +22,22 @@ SMTP_PORT = 587
 SENDER_EMAIL = os.getenv('EMAIL_USER')
 SENDER_PASSWORD = os.getenv('EMAIL_PASSWORD')
 
+# ЮKassa config (лучше вынести в .env)
+YOOKASSA_SHOP_ID = os.getenv('YOOKASSA_SHOP_ID')
+YOOKASSA_SECRET_KEY = os.getenv('YOOKASSA_SECRET_KEY')
+
 # Проверяем загруженные переменные окружения
 print("Проверка конфигурации:")
 print(f"EMAIL_USER: {SENDER_EMAIL}")
 print(f"EMAIL_PASSWORD: {'*' * len(SENDER_PASSWORD) if SENDER_PASSWORD else 'Не установлен'}")
+
+# Проверка конфигурации ЮKassa
+print(f"YOOKASSA_SHOP_ID: {YOOKASSA_SHOP_ID}")
+print(f"YOOKASSA_SECRET_KEY: {'*' * len(YOOKASSA_SECRET_KEY) if YOOKASSA_SECRET_KEY else 'Не установлен'}")
+
+from yookassa import Configuration
+Configuration.account_id = YOOKASSA_SHOP_ID
+Configuration.secret_key = YOOKASSA_SECRET_KEY
 
 def send_simple_email(recipient_email):
     try:
@@ -107,6 +122,64 @@ def handle_email():
         response.headers.add('Access-Control-Allow-Origin', '*')
         return response
 
+@app.route('/create_payment', methods=['POST'])
+def create_payment():
+    try:
+        data = request.get_json() or request.form
+        email = data.get('email')
+        name = data.get('name')
+        product = data.get('product')
+        price = data.get('price')  # в рублях, строкой или числом
+        if not (email and product and price):
+            return jsonify({'success': False, 'error': 'Необходимы email, product, price'}), 400
+        # Генерируем уникальный идентификатор платежа
+        payment_id = str(uuid.uuid4())
+        # Создаем платеж
+        payment = Payment.create({
+            "amount": {
+                "value": str(price),
+                "currency": "RUB"
+            },
+            "confirmation": {
+                "type": "redirect",
+                "return_url": "https://windowspro.store/"  # после оплаты
+            },
+            "capture": True,
+            "description": f"Покупка {product} для {email}",
+            "metadata": {
+                "email": email,
+                "name": name,
+                "product": product,
+                "payment_id": payment_id
+            }
+        })
+        confirmation_url = payment.confirmation.confirmation_url
+        return jsonify({'success': True, 'confirmation_url': confirmation_url})
+    except Exception as e:
+        print("\nОШИБКА ПРИ СОЗДАНИИ ПЛАТЕЖА:", str(e))
+        print(traceback.format_exc())
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/yookassa_webhook', methods=['POST'])
+def yookassa_webhook():
+    try:
+        event = request.get_json()
+        if event and event.get('event') == 'payment.succeeded':
+            payment_obj = event['object']
+            metadata = payment_obj.get('metadata', {})
+            email = metadata.get('email')
+            name = metadata.get('name')
+            product = metadata.get('product')
+            # Здесь можно отправить письмо с ключом активации
+            send_simple_email(email)  # или send_license_email(email, name, product)
+            print(f"Платеж успешен для {email}, продукт: {product}")
+        return jsonify({'status': 'ok'})
+    except Exception as e:
+        print("\nОШИБКА В WEBHOOK:", str(e))
+        print(traceback.format_exc())
+        return jsonify({'status': 'error', 'error': str(e)}), 500
+
 if __name__ == '__main__':
     print("\nЗапуск сервера для отправки email...")
     app.run(port=5000, debug=True)
+ 

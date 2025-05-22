@@ -379,15 +379,16 @@
     </div>
 
     <script>
+        let selectedProduct = '';
+        let selectedPrice = '';
+
         function switchTab(tabId) {
             // Скрываем все вкладки
             document.querySelectorAll('.tab-content').forEach(tab => {
                 tab.classList.add('hidden');
             });
-            
             // Показываем выбранную вкладку
             document.getElementById(tabId).classList.remove('hidden');
-            
             // Обновляем стили кнопок
             document.querySelectorAll('.tab-button').forEach(button => {
                 button.classList.remove('active');
@@ -395,7 +396,9 @@
             event.target.classList.add('active');
         }
 
-        function openModal() {
+        function openModal(product, price) {
+            selectedProduct = product;
+            selectedPrice = price;
             document.getElementById('buyModal').classList.remove('hidden');
             document.getElementById('buyModal').classList.add('flex');
         }
@@ -406,42 +409,48 @@
         }
 
         // Добавляем обработчики для всех кнопок "Купить"
-        document.querySelectorAll('button').forEach(button => {
-            if (button.textContent.trim() === 'Купить') {
-                button.onclick = openModal;
-            }
+        document.querySelectorAll('.tab-content .bg-blue-600').forEach(button => {
+            button.onclick = function() {
+                // Находим родительский .tab-content и .text-2xl (название продукта)
+                const productCard = button.closest('div');
+                const productName = productCard.querySelector('h3').textContent.trim();
+                const priceText = productCard.querySelector('p.text-3xl').textContent.trim();
+                // Извлекаем только число из цены
+                const price = priceText.replace(/[^\d]/g, '');
+                openModal(productName, price);
+            };
         });
 
         // Обработка отправки формы
         document.getElementById('buyForm').onsubmit = function(e) {
             e.preventDefault();
             const email = document.getElementById('email').value;
-
-            // Создаем объект FormData для отправки данных
-            const formData = new FormData();
-            formData.append('email', email);
-
             // Отправляем данные на сервер
-            fetch('http://localhost:5000/send_email', {
+            fetch('http://localhost:5000/create_payment', {
                 method: 'POST',
-                body: formData,
                 headers: {
+                    'Content-Type': 'application/json',
                     'Accept': 'application/json',
                 },
+                body: JSON.stringify({
+                    email: email,
+                    product: selectedProduct,
+                    price: selectedPrice
+                }),
                 mode: 'cors'
             })
             .then(response => response.json())
             .then(data => {
-                if (data.success) {
-                    alert('Спасибо за заказ! Письмо отправлено на ваш email.');
+                if (data.success && data.confirmation_url) {
+                    window.location.href = data.confirmation_url;
                 } else {
-                    alert('Произошла ошибка при отправке. Пожалуйста, попробуйте позже.');
+                    alert('Произошла ошибка при создании платежа. Пожалуйста, попробуйте позже.');
+                    closeModal();
                 }
-                closeModal();
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Произошла ошибка при отправке. Пожалуйста, попробуйте позже.');
+                alert('Произошла ошибка при создании платежа. Пожалуйста, попробуйте позже.');
                 closeModal();
             });
         };
